@@ -7,8 +7,8 @@ This example service can be deployed for testing authentification and connection
 Run the Terraform script in the *basic_infrastructure* folder with: 
 
 ``` shell
-terraform init -var="project_id=<PROJECT_ID>"
-terraform plan -out="tf-plan"
+terraform init
+terraform plan -out="tf-plan" -var="project_id=<project_id>"
 terraform apply "tf-plan"
 ```
 Run this with **<PROJECT_ID>** replaced with your google clouds project id. 
@@ -39,8 +39,8 @@ Now the cloud run container can be deployed with the infrastructure it depends o
 This can be rolled out by the following commands inside the *example/terraform* folder: 
 
 ``` shell
-terraform init -var="project_id=<project_id>"
-terraform plan -out="tf-plan"
+terraform init
+terraform plan -out="tf-plan" -var="project_id=<project_id>"
 terraform apply "tf-plan"
 ```
 Run this with **<PROJECT_ID>** replaced with your google clouds project id. 
@@ -53,3 +53,11 @@ Now the storage bucket, cloud run instance and loadbalancer should be visible in
 
 In oder to test the cloud storage connectivity upload a file to the storage bucket using the google cloud console or the POST method behind the **/upload** route. 
 Hiting the **/files** endpoint afterwards should now return a json list with the filename and creation date in it. 
+
+## Destroy the example
+
+Google Resources cost money. So dont forget to destroy the infrastructure created using terraform: 
+
+``` shell
+terraform destroy -var="project_id=<project_id>"
+```
