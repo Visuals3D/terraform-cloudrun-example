@@ -79,7 +79,7 @@ resource "google_cloud_run_service" "cloudrun_storage_uploader" {
         image = var.container_image_url == null ? "${lower(var.resource_location)}.gcr.io/${var.project_id}/storage-uploader:${var.container_image_version_tag}" : "${var.container_image_url}:${var.container_image_version_tag}"
         env {
           name = "BUCKET"
-          value = "${var.bucket_name}_${var.project_id}"
+          value = google_storage_bucket.test_bucket.name
         }
       }
       service_account_name = google_service_account.svc_cloudrun.email
@@ -97,6 +97,14 @@ resource "google_cloud_run_service" "cloudrun_storage_uploader" {
   depends_on = [
     google_project_service.cloudrun_api_service
   ]
+}
+
+resource "google_cloud_run_service_iam_member" "cloudrun_user_access" {
+ service = google_cloud_run_service.cloudrun_storage_uploader.name
+ location = google_cloud_run_service.cloudrun_storage_uploader.location
+ project = google_cloud_run_service.cloudrun_storage_uploader.project
+ role = "roles/run.invoker"
+ member = "allUsers"
 }
 
 # Load Balancer
