@@ -24,7 +24,7 @@ docker push eu.gcr.io/<PROJECT_ID>/storage-uploader:latest
 ```
 
 Now there should be an image named storage-uploader inside the container registry in Google Cloud Console.
-<img src="https://user-images.githubusercontent.com/74773202/200899225-1fbde32a-7bc1-4348-a21a-1139153539b7.png" width="200"/>
+<br /><img src="https://user-images.githubusercontent.com/74773202/200899225-1fbde32a-7bc1-4348-a21a-1139153539b7.png" width="300"/>
 
 
 ## Create Cloud Storage and Cloud Run Container
@@ -46,10 +46,10 @@ terraform apply "tf-plan"
 Run this with **<PROJECT_ID>** replaced with your google clouds project id. 
 
 Now the storage bucket, cloud run instance and loadbalancer should be visible in the google cloud console. In order to test the container send a get request to the ip adress of the loadbalancer with the **/files** route. This should return an empty json list. 
-<img src="https://user-images.githubusercontent.com/74773202/200898946-04407cfe-bdd6-438b-8f86-097b4d05f50b.png" width="200"/>
+<br /><img src="https://user-images.githubusercontent.com/74773202/200898946-04407cfe-bdd6-438b-8f86-097b4d05f50b.png" width="300"/>
 
 
-<img src="https://user-images.githubusercontent.com/74773202/200898815-fec8a672-84dc-4da0-ad89-72076f22ed99.png" width="200"/>
+<br /><img src="https://user-images.githubusercontent.com/74773202/200898815-fec8a672-84dc-4da0-ad89-72076f22ed99.png" width="300"/>
 
 In oder to test the cloud storage connectivity upload a file to the storage bucket using the google cloud console or the POST method behind the **/upload** route. 
 Hiting the **/files** endpoint afterwards should now return a json list with the filename and creation date in it. 
